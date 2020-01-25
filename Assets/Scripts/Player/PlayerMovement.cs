@@ -40,5 +40,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+	// TODO: Wall jumping is possible and we need to remove it.
+
 
 }

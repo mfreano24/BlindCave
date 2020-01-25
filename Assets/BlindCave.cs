@@ -34,7 +34,7 @@ namespace BlindCave {
 			Height = System.Convert.ToInt16(lines[1].Split('x')[1]);
 			CamMoves = (lines[2].Split(' ')[0] == "True");
 			if (!CamMoves) {
-				CamPos = new Vector3(System.Convert.ToInt16(lines[2].Split(' ')[1]), System.Convert.ToInt16(lines[2].Split(' ')[2]), System.Convert.ToInt16(lines[2].Split(' ')[3]));
+				CamPos = new Vector3(System.Convert.ToInt16(lines[2].Split(' ')[1]), System.Convert.ToInt16(lines[2].Split(' ')[2]), -10);
 			} else {
 				CamPos = new Vector3(0, 0, -5);
 			}

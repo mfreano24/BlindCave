@@ -14,35 +14,26 @@ public class LevelManager : MonoBehaviour {
 	public GameObject gridPrefab;
 
 	// Start is called before the first frame update
-	void Start() {
-		DontDestroyOnLoad(this.gameObject);
-		if (SceneManager.GetActiveScene().name == "Loader") {
-			SceneManager.LoadScene("Main Menu");
-		}
+	void Awake() {
+		GenerateLevel(PlayerPrefs.GetInt("Level"));
+		PlayerPrefs.DeleteKey("Level");
 	}
 
 	public void GenerateLevel(int i) {
 		Debug.Log(i);
 		Levels thisLevel = new Levels(i);
-		UnityEngine.SceneManagement.SceneManager.LoadScene("Proof_of_Concept");
 
-		//TO-DO: Get objects to not revert back to their original places without DontDestroyOnLoad();
-		//foreach (GameObject g in GameObject.FindGameObjectsWithTag("MainCamera")) {
-		//	if (thisLevel.CamMoves) {
-		//		// TO-DO: Set camera as child of player (or use camera controller to follow player)
-		//	} else {
-		//		g.transform.position = thisLevel.CamPos;
-		//	}
-		//}
+		foreach (GameObject g in GameObject.FindGameObjectsWithTag("MainCamera")) {
+			if (thisLevel.CamMoves) {
+				// TO-DO: Set camera as child of player (or use camera controller to follow player)
+			} else {
+				g.transform.position = thisLevel.CamPos;
+			}
+		}
 
 		GameObject p1 = (GameObject)Instantiate(playerPrefab, thisLevel.P1Start, Quaternion.identity);
 		GameObject p2 = (GameObject)Instantiate(playerPrefab, thisLevel.P2Start, Quaternion.identity);
-
 		GameObject grid = (GameObject)Instantiate(gridPrefab, Vector3.zero, Quaternion.identity);
-
-		DontDestroyOnLoad(grid);
-		DontDestroyOnLoad(p1);
-		DontDestroyOnLoad(p2);
 
 		for (int k = 0; k < 4; k++) {
 			grid.transform.GetChild(k).GetComponent<Tilemap>().ClearAllTiles();

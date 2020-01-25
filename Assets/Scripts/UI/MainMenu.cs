@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour {
 		}
 
 		// Initializing the level buttons (15 per page)
-		// TO-DO: Manipulate this code to be fit for multiple pages
+		// TODO: Manipulate this code to be fit for multiple pages
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
 				GameObject newLevel = (GameObject)Instantiate(buttonPrefab, levelPanel.transform);
@@ -89,7 +89,9 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void LoadLevel(int i) {
-		GameObject.Find("LevelManager").GetComponent<LevelManager>().GenerateLevel(i);
+		PlayerPrefs.SetInt("Level", i);
+		// TODO: Probably send the user to a connections page, so they can find a room
+		UnityEngine.SceneManagement.SceneManager.LoadScene("Proof_of_Concept");
 	}
 
 	public void Quit() {
