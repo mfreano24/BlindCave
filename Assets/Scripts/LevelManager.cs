@@ -26,13 +26,14 @@ public class LevelManager : MonoBehaviour {
 		Levels thisLevel = new Levels(i);
 		UnityEngine.SceneManagement.SceneManager.LoadScene("Proof_of_Concept");
 
-		foreach (GameObject g in GameObject.FindGameObjectsWithTag("MainCamera")) {
-			if (thisLevel.CamMoves) {
-				// TO-DO: Set camera as child of player (or use camera controller to follow player)
-			} else {
-				g.transform.position = thisLevel.CamPos;
-			}
-		}
+		//TO-DO: Get objects to not revert back to their original places without DontDestroyOnLoad();
+		//foreach (GameObject g in GameObject.FindGameObjectsWithTag("MainCamera")) {
+		//	if (thisLevel.CamMoves) {
+		//		// TO-DO: Set camera as child of player (or use camera controller to follow player)
+		//	} else {
+		//		g.transform.position = thisLevel.CamPos;
+		//	}
+		//}
 
 		GameObject p1 = (GameObject)Instantiate(playerPrefab, thisLevel.P1Start, Quaternion.identity);
 		GameObject p2 = (GameObject)Instantiate(playerPrefab, thisLevel.P2Start, Quaternion.identity);
@@ -40,6 +41,8 @@ public class LevelManager : MonoBehaviour {
 		GameObject grid = (GameObject)Instantiate(gridPrefab, Vector3.zero, Quaternion.identity);
 
 		DontDestroyOnLoad(grid);
+		DontDestroyOnLoad(p1);
+		DontDestroyOnLoad(p2);
 
 		for (int k = 0; k < 4; k++) {
 			grid.transform.GetChild(k).GetComponent<Tilemap>().ClearAllTiles();

@@ -46,10 +46,11 @@ namespace BlindCave {
 			// Generation of tiles
 			TopLeftTile = new Vector3Int(System.Convert.ToInt16(lines[5].Split(' ')[0]), System.Convert.ToInt16(lines[5].Split(' ')[1]), 0);
 
-			Grid = new Tile[Width, Height];
+			Grid = new Tile[Height, Width];
 
 			for (int i = 6; i < 6 + Height; i++) {
 				string[] innerData = lines[i].TrimEnd('\r').Split(' ');
+				Debug.Log("Length: " + innerData.Length);
 				for (int j = 0; j < innerData.Length; j++) {
 					//(x,y)
 					Tile newTile = new Tile(innerData[j]);
