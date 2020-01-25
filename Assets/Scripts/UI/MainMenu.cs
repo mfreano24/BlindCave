@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour {
 			}
 		}
 
-		// Read the latest level
+		// Read the latest levels
 		using (var reader = new StreamReader(Path.Combine(Application.persistentDataPath, "player.dat"))) {
 			lastUnlockedLevel = System.Convert.ToInt16(reader.ReadLine());
 		}
@@ -52,6 +52,12 @@ public class MainMenu : MonoBehaviour {
 					newLevel.GetComponent<Button>().interactable = false;
 				}
 			}
+		}
+	}
+
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			levelPanel.SetActive(false);
 		}
 	}
 
@@ -88,6 +94,10 @@ public class MainMenu : MonoBehaviour {
 
 	public void Quit() {
 		Application.Quit();
+	}
+
+	public void HideLevels() {
+		levelPanel.SetActive(false);
 	}
 
 }

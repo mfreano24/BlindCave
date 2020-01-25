@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
     void Update(){
-        rb.velocity = new Vector3((Input.GetAxis("Horizontal") * hSpeed), rb.velocity.y, 0);
+		float xInput = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector3((xInput * hSpeed), rb.velocity.y, 0);
+
         //if grounded
         if(rb.velocity.y != 0){
             isJumping = true;
