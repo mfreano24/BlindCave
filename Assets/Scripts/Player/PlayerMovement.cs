@@ -1,29 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 {
+
+    #region IPunObservable Implementation
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+        if(stream.IsWriting){
+            stream.SendNext(isJumping);
+        }
+        else{
+            this.isJumping = (bool)stream.ReceiveNext();
+        }
+    }
+    #endregion
+
     //COMPONENTS
+    public static GameObject LocalPlayerInstance;
     Rigidbody2D rb;
 	GlobalVars gv;
     //VARS
     Vector2 moveDirection;
     public float playerSpeed;
     public float jumpHeight;
-
 	bool isPlaying = true;
-
     public float hSpeed = 5f;
     public float jumpPower = 15f;
     private int directionFacing = 1;
     private bool isJumping = false;
 
+    //Photon Configs go in Awake() so that Start() can be called successfully.
+    void Awake(){
+        if(photonView.IsMine){
+            PlayerMovement.LocalPlayerInstance = this.gameObject;
+        }
+        DontDestroyOnLoad(this.gameObject);
+
+    }
     void Start() {
+        this.gameObject.name = "P" + PhotonNetwork.PlayerList.Length.ToString();
         rb = GetComponent<Rigidbody2D>();
 		gv = GameObject.Find("EventSystem").GetComponent<GlobalVars>();
+        
     }
+
     void Update() {
+        if(!photonView.IsMine && PhotonNetwork.IsConnected){
+            return;
+        }
+
 		if (!isPlaying) {
 			return;
 		}
