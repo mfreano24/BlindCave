@@ -44,6 +44,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         this.gameObject.name = "P" + PhotonNetwork.PlayerList.Length.ToString();
         rb = GetComponent<Rigidbody2D>();
 		gv = GameObject.Find("EventSystem").GetComponent<GlobalVars>();
+
+        //Instantiation -> spawning
+        //DO NOT WORRY THIS IS ALL TEMPORARY EVERYTHING IS UNDER CONTROL I JUST WANT TO MAKE SURE IT WORKS
+        if(this.gameObject.name == "P1"){
+            this.transform.position = new Vector2(-8.3f, 11f);
+        }
+        else if(this.gameObject.name == "P2"){
+            this.transform.position = new Vector2(-8.3f, -8f);
+        }
         
     }
 
