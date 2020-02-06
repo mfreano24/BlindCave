@@ -47,11 +47,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
         //Instantiation -> spawning
         //DO NOT WORRY THIS IS ALL TEMPORARY EVERYTHING IS UNDER CONTROL I JUST WANT TO MAKE SURE IT WORKS
+        //Z POSITION SET TO -1 TO ORDER WITH THE TEMPORARY DARK PANEL
         if(this.gameObject.name == "P1"){
-            this.transform.position = new Vector2(-8.3f, 11f);
+            this.transform.position = new Vector3(-8.3f, 11f, -1f);
         }
         else if(this.gameObject.name == "P2"){
-            this.transform.position = new Vector2(-8.3f, -8f);
+            this.transform.position = new Vector3(-8.3f, -8f, -1f);
         }
         
     }
