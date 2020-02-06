@@ -8,6 +8,20 @@ using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
 
+    #region Interactions
+    
+    //P1 EXCLUSIVE
+    public GameObject P1_darkmask;
+    public GameObject P1_cavelight;
+    //P2 EXCLUSIVE
+    public GameObject P2_darkmask;
+    public GameObject P2_cavelight;
+
+
+
+
+    #endregion
+
     #region Photon Callbacks
 
 
@@ -74,6 +88,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
             
         }
+        
+        
     }
 
 
@@ -93,7 +109,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
 
-        PhotonNetwork.LoadLevel("Proof_of_Concept");//THIS WILL BE CHANGED LATER!!!!!!!!!!!!!!!!!!!!!!!
+        PhotonNetwork.LoadLevel("Game_Level");//THIS WILL BE CHANGED LATER!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     #endregion

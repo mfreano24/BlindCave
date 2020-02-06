@@ -113,7 +113,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom(){
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-        PhotonNetwork.LoadLevel("Proof_of_Concept"); //WILL BE CHANGED LATER!!!!!!!!!!!!!!!!!!!!!!!
+        PhotonNetwork.LoadLevel("Game_Level"); //WILL BE CHANGED LATER!!!!!!!!!!!!!!!!!!!!!!! (maybe to include a lobby if i feel like it idk lmao)
     }
 
 
