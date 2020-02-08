@@ -29,7 +29,7 @@ public class LightBall : MonoBehaviour
             transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 2);
         }
         else{
-            transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, 2);
+            transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, 3);
         }
         
 

@@ -144,7 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99a0bfbef014694a9015fdda8f50da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightPrefab: {fileID: 7230276668532772990, guid: c57bdc791e07bf94bbe78019726e945c,
+  playerlightPrefab: {fileID: 7230276668532772990, guid: c57bdc791e07bf94bbe78019726e945c,
+    type: 3}
+  cavelightPrefab: {fileID: 7355754407837932434, guid: 201237ece138e32419063c706ae64031,
     type: 3}
   playerSpeed: 5
   jumpHeight: 5

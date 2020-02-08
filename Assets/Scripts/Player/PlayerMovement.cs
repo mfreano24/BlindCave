@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
     //COMPONENTS
     public static GameObject LocalPlayerInstance;
-    public GameObject lightPrefab;
+    public GameObject playerlightPrefab;
+    public GameObject cavelightPrefab;
     GameObject light_inst;
     Rigidbody2D rb;
 	GlobalVars gv;
@@ -51,32 +52,33 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         on network, we want the local player's light to be small and to follow them and the nonlocal player's light to be big and light up the whole room.
         */
         if(this.gameObject.name == "P1"){
-            this.transform.position = new Vector3(-8.3f, 11f, -1f);
+            this.transform.position = new Vector3(-8.3f, 11f, 0f);
 
         }
 
         else if(this.gameObject.name == "P2"){
-            this.transform.position = new Vector3(-8.3f, -8f, -1f);
+            this.transform.position = new Vector3(-8.3f, -8f, 0f);
         }
 
 
         if(PlayerMovement.LocalPlayerInstance.gameObject.name == "P1"){
             //p1 light
-            light_inst = Instantiate(lightPrefab);
+            light_inst = Instantiate(playerlightPrefab);
             light_inst.gameObject.name = "P1_light";
             light_inst.GetComponent<LightBall>().isPlayerLight(true);
             light_inst.transform.parent = GameObject.Find("P1").transform;
             Light lb =  light_inst.GetComponent<Light>();
-            lb.areaSize = new Vector2(2.75f,2.75f);
             lb.color = new Color(242f/255f, 216f/255f, 114f/255f);
+            lb.range = 3;
             lb.intensity = 1;
 
-            light_inst = Instantiate(lightPrefab);
+            light_inst = Instantiate(cavelightPrefab);
             light_inst.gameObject.name = "P2_light";
             light_inst.GetComponent<LightBall>().isPlayerLight(false);
             light_inst.transform.parent = GameObject.Find("P2_Camera").transform;
             lb =  light_inst.GetComponent<Light>();
-            lb.areaSize = new Vector2(20,20);
+            lb.color = new Color(190f/255f, 161f/255f, 108f/255f);
+            lb.range = 40;
             lb.intensity = 5;
         }
 
