@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
     //COMPONENTS
     public static GameObject LocalPlayerInstance;
+    public GameObject lightPrefab;
+    GameObject light_inst;
     Rigidbody2D rb;
 	GlobalVars gv;
     //VARS
@@ -45,15 +47,43 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         rb = GetComponent<Rigidbody2D>();
 		gv = GameObject.Find("EventSystem").GetComponent<GlobalVars>();
 
-        //Instantiation -> spawning
-        //DO NOT WORRY THIS IS ALL TEMPORARY EVERYTHING IS UNDER CONTROL I JUST WANT TO MAKE SURE IT WORKS
-        //Z POSITION SET TO -1 TO ORDER WITH THE TEMPORARY DARK PANEL
+        /*
+        on network, we want the local player's light to be small and to follow them and the nonlocal player's light to be big and light up the whole room.
+        */
         if(this.gameObject.name == "P1"){
             this.transform.position = new Vector3(-8.3f, 11f, -1f);
+
         }
+
         else if(this.gameObject.name == "P2"){
             this.transform.position = new Vector3(-8.3f, -8f, -1f);
         }
+
+
+        if(PlayerMovement.LocalPlayerInstance.gameObject.name == "P1"){
+            //p1 light
+            light_inst = Instantiate(lightPrefab);
+            light_inst.gameObject.name = "P1_light";
+            light_inst.GetComponent<LightBall>().isPlayerLight(true);
+            light_inst.transform.parent = GameObject.Find("P1").transform;
+            Light lb =  light_inst.GetComponent<Light>();
+            lb.areaSize = new Vector2(2.75f,2.75f);
+            lb.color = new Color(242f/255f, 216f/255f, 114f/255f);
+            lb.intensity = 1;
+
+            light_inst = Instantiate(lightPrefab);
+            light_inst.gameObject.name = "P2_light";
+            light_inst.GetComponent<LightBall>().isPlayerLight(false);
+            light_inst.transform.parent = GameObject.Find("P2_Camera").transform;
+            lb =  light_inst.GetComponent<Light>();
+            lb.areaSize = new Vector2(20,20);
+            lb.intensity = 5;
+        }
+
+        else if(PlayerMovement.LocalPlayerInstance.gameObject.name == "P2"){
+
+        }
+
         
     }
 
