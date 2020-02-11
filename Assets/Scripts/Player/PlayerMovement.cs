@@ -83,8 +83,27 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         else if(PlayerMovement.LocalPlayerInstance.gameObject.name == "P2"){
+            //p1 light
+            light_inst = Instantiate(playerlightPrefab);
+            light_inst.gameObject.name = "P2_light";
+            light_inst.GetComponent<LightBall>().isPlayerLight(true);
+            light_inst.transform.parent = GameObject.Find("P2").transform;
+            Light lb =  light_inst.GetComponent<Light>();
+            lb.color = new Color(242f/255f, 216f/255f, 114f/255f);
+            lb.range = 3;
+            lb.intensity = 1;
+
+            light_inst = Instantiate(cavelightPrefab);
+            light_inst.gameObject.name = "P1_light";
+            light_inst.GetComponent<LightBall>().isPlayerLight(false);
+            light_inst.transform.parent = GameObject.Find("P1_Camera").transform;
+            lb =  light_inst.GetComponent<Light>();
+            lb.color = new Color(190f/255f, 161f/255f, 108f/255f);
+            lb.range = 40;
+            lb.intensity = 5;
 
         }
+        //some problems here, will get fixed surely :)
 
         
     }
