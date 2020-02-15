@@ -4951,7 +4951,7 @@ Transform:
   m_GameObject: {fileID: 253485890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.012, y: 0.012, z: 20}
-  m_LocalScale: {x: 6.316259, y: 7.0907702, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
   m_RootOrder: 0
@@ -5525,7 +5525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5767,8 +5767,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353686163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.336, y: 0, z: 1}
-  m_LocalScale: {x: 0.444, y: 1, z: 1}
+  m_LocalPosition: {x: -3.263, y: 0, z: 1}
+  m_LocalScale: {x: 0.455988, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2105684381}
   m_RootOrder: 1
@@ -5991,7 +5991,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a8e7e43a06b9bb247b0e008ddb946c92, type: 2}
+  - {fileID: 2100000, guid: 34f3e5c7210b9ee42b6c06ca624178fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10708,7 +10708,7 @@ GameObject:
   - component: {fileID: 1996052957}
   - component: {fileID: 1996052958}
   m_Layer: 0
-  m_Name: P2_DarknessMask
+  m_Name: P2_BackingMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

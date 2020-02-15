@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject playerlightPrefab;
     public GameObject cavelightPrefab;
     GameObject light_inst;
+    GameObject p1_backing;
+    GameObject p2_backing;
+    
     Rigidbody2D rb;
 	GlobalVars gv;
     //VARS
@@ -52,7 +55,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         on network, we want the local player's light to be small and to follow them and the nonlocal player's light to be big and light up the whole room.
         */
         if(this.gameObject.name == "P1"){
-            this.transform.position = new Vector3(-8.3f, 11f, 0f);
+            this.transform.position = new Vector3(-8.3f, 11f, -4f);
 
         }
 
@@ -60,6 +63,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             this.transform.position = new Vector3(-8.3f, -8f, 0f);
         }
 
+        p1_backing = GameObject.Find("P1_BackingMask");
+        p2_backing = GameObject.Find("P2_BackingMask");
 
         if(PlayerMovement.LocalPlayerInstance.gameObject.name == "P1"){
             //p1 light
@@ -71,15 +76,22 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             lb.color = new Color(242f/255f, 216f/255f, 114f/255f);
             lb.range = 3;
             lb.intensity = 1;
-
-            light_inst = Instantiate(cavelightPrefab);
+            
+            //p2 area light
+            /*light_inst = Instantiate(cavelightPrefab);
             light_inst.gameObject.name = "P2_light";
             light_inst.GetComponent<LightBall>().isPlayerLight(false);
             light_inst.transform.parent = GameObject.Find("P2_Camera").transform;
             lb =  light_inst.GetComponent<Light>();
             lb.color = new Color(190f/255f, 161f/255f, 108f/255f);
             lb.range = 40;
-            lb.intensity = 5;
+            lb.intensity = 5;*/
+
+
+            //p2 camera backing
+            p2_backing.SetActive(false);
+            //p1_backing.SetActive(true);
+
         }
 
         else if(PlayerMovement.LocalPlayerInstance.gameObject.name == "P2"){
@@ -93,6 +105,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             lb.range = 3;
             lb.intensity = 1;
 
+            /*p2 area light
             light_inst = Instantiate(cavelightPrefab);
             light_inst.gameObject.name = "P1_light";
             light_inst.GetComponent<LightBall>().isPlayerLight(false);
@@ -100,7 +113,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             lb =  light_inst.GetComponent<Light>();
             lb.color = new Color(190f/255f, 161f/255f, 108f/255f);
             lb.range = 40;
-            lb.intensity = 5;
+            lb.intensity = 5;*/
+
+            //p1 backing
+            p1_backing.SetActive(false);
+            p2_backing.SetActive(true);
 
         }
         //some problems here, will get fixed surely :)
