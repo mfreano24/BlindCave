@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     public float jumpPower = 15f;
     private int directionFacing = 1;
     private bool isJumping = false;
+    int flipped;
 
     //Photon Configs go in Awake() so that Start() can be called successfully.
     void Awake(){
@@ -121,6 +122,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
         }
         //some problems here, will get fixed surely :)
+        flipped = 1;
 
         
     }
@@ -134,7 +136,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 			return;
 		}
 
-		float xInput = Input.GetAxis("Horizontal");
+		float xInput = (flipped) * Input.GetAxis("Horizontal");
         rb.velocity = new Vector3((xInput * hSpeed), rb.velocity.y, 0);
 
         //if grounded
@@ -162,7 +164,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 			gv.p1Death++;
 		} else {
 			transform.position = gv.p2ResetPos[gv.level];
-			gv.p1Death++;
+			gv.p2Death++;
 		}
 
 		// TODO: Update UI
@@ -175,6 +177,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 			DeathToPlayer();
 		}
 	}
+
+
+    public void flipControls(){
+        flipped = -1;
+        //TODO: add condition to unfuck the controls
+    }
 
 
 }
