@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         on network, we want the local player's light to be small and to follow them and the nonlocal player's light to be big and light up the whole room.
         */
         if(this.gameObject.name == "P1"){
-            this.transform.position = new Vector3(-8.3f, 11f, -4f);
+            this.transform.position = new Vector3(-8.3f, 11f, 0f);
 
         }
 
@@ -156,20 +156,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         
     }
 
-	// TODO: Wall jumping is possible and we need to remove it.
+	// TODO: Wall jumping is possible and we gotta remove it?
 
 	private void DeathToPlayer() {
-		if (name == "P1") {
-			transform.position = gv.p1ResetPos[gv.level];
-			gv.p1Death++;
-		} else {
-			transform.position = gv.p2ResetPos[gv.level];
-			gv.p2Death++;
-		}
-
-		// TODO: Update UI
-
-	}
+        death();
+    }
 
 	// Collision with Spikes
 	private void OnTriggerEnter2D(Collider2D collision) {
@@ -182,6 +173,25 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     public void flipControls(){
         flipped = -1;
         //TODO: add condition to unfuck the controls
+    }
+
+    public void death(){ //should be an IEnumerator when i fix the SHIT
+        /*Vector3 defScale = transform.localScale;
+        float defSpeed = playerSpeed;
+        playerSpeed = 0;
+        for(int i = 0; i < 20 ; i++){
+            transform.localScale = 0.9f * transform.localScale;
+            yield return new WaitForSeconds(0.1f);
+        }*/
+        if (name == "P1") {
+			transform.position = gv.p1ResetPos[gv.level];
+			gv.p1Death++;
+		} else {
+			transform.position = gv.p2ResetPos[gv.level];
+			gv.p2Death++;
+		}
+        //transform.localScale = defScale;
+        //playerSpeed = defSpeed;
     }
 
 

@@ -76,6 +76,8 @@ public class Launcher : MonoBehaviourPunCallbacks
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
         if (PhotonNetwork.IsConnected)
         {
+            Debug.Log("# of rooms right now (PRE JOINRANDOMROOM()): " +  PhotonNetwork.CountOfRooms.ToString());
+            //RETURNING 0 FOR SOME REASON
             // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
             PhotonNetwork.JoinRandomRoom();
         }
@@ -95,7 +97,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster(){
         if(isConnecting){
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-            PhotonNetwork.JoinRandomRoom(); //potentially change this
+            PhotonNetwork.JoinRandomRoom(null, 2); //potentially change this
         }   
     }
 
