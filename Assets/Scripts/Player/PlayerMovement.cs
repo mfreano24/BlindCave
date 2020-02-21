@@ -6,14 +6,25 @@ using Photon.Realtime;
 
 public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 {
+    
 
     #region IPunObservable Implementation
+    float lag;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+        
         if(stream.IsWriting){
             stream.SendNext(isJumping);
+            stream.SendNext(rb.position);
+            stream.SendNext(rb.velocity);
         }
         else{
             this.isJumping = (bool)stream.ReceiveNext();
+            rb.position = (Vector3)stream.ReceiveNext();
+            rb.velocity = (Vector3)stream.ReceiveNext();
+
+            lag = Mathf.Abs((float) (PhotonNetwork.Time - info.timestamp));
+            rb.position += rb.velocity * lag;
+
         }
     }
     #endregion
@@ -38,6 +49,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     private int directionFacing = 1;
     private bool isJumping = false;
     int flipped;
+
+
 
     //Photon Configs go in Awake() so that Start() can be called successfully.
     void Awake(){
@@ -75,7 +88,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             light_inst.transform.parent = GameObject.Find("P1").transform;
             Light lb =  light_inst.GetComponent<Light>();
             lb.color = new Color(242f/255f, 216f/255f, 114f/255f);
-            lb.range = 3;
+            lb.range = 4.5f;
             lb.intensity = 1;
             
             //p2 area light
@@ -127,8 +140,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         
     }
 
-    void Update() {
-        if(!photonView.IsMine && PhotonNetwork.IsConnected){
+    void FixedUpdate() {
+        if (!photonView.IsMine)
+        {
+            rb.position = Vector3.MoveTowards(rb.position, rb.velocity * lag, Time.fixedDeltaTime);
             return;
         }
 
