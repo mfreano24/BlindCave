@@ -33,13 +33,13 @@ public class PlatformMovement : MonoBehaviour
             case movementType.Horizontal:
                 Debug.Log("Horizontal");
                 startPosition = transform.position;
-                startPosition.x += Mathf.Sin(Time.time * frequency) * amplitude * Time.deltaTime;
+                startPosition.x += Mathf.Sin(Time.time * frequency) * amplitude/(2*Mathf.PI);
                 transform.position = startPosition;
                 break;
             case movementType.Vertical:
                 Debug.Log("Vertical");
                 startPosition = transform.position;
-                startPosition.y += Mathf.Sin(Time.time * frequency) * amplitude * Time.deltaTime;
+                startPosition.y += Mathf.Sin(Time.time * frequency) * amplitude/(2*Mathf.PI);
                 transform.position = startPosition;
                 break;
             case movementType.Diagonal:
