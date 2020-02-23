@@ -7,6 +7,7 @@ public class PlatformMovement : MonoBehaviour
 {
     //private
     private Vector3 startPosition;
+    private float calculatedAmplitude;
     
     //public
     public float amplitude = .5f;
@@ -22,6 +23,7 @@ public class PlatformMovement : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        calculatedAmplitude = amplitude / (2 * Mathf.PI);
     }
 
     // Update is called once per frame
@@ -33,13 +35,13 @@ public class PlatformMovement : MonoBehaviour
             case movementType.Horizontal:
                 Debug.Log("Horizontal");
                 startPosition = transform.position;
-                startPosition.x += Mathf.Sin(Time.time * frequency) * amplitude/(2*Mathf.PI);
+                startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
                 transform.position = startPosition;
                 break;
             case movementType.Vertical:
                 Debug.Log("Vertical");
                 startPosition = transform.position;
-                startPosition.y += Mathf.Sin(Time.time * frequency) * amplitude/(2*Mathf.PI);
+                startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
                 transform.position = startPosition;
                 break;
             case movementType.Diagonal:
