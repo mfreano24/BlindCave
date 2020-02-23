@@ -150,7 +150,7 @@ MonoBehaviour:
   cavelightPrefab: {fileID: 7355754407837932434, guid: 201237ece138e32419063c706ae64031,
     type: 3}
   playerSpeed: 5
-  jumpHeight: 5
+  jumpHeight: 6
   hSpeed: 5
   jumpPower: 15
 --- !u!114 &5498405660299315804
