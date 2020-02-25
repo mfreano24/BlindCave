@@ -50,4 +50,17 @@ public class PlatformMovement : MonoBehaviour
         }
 
     }
+
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if(other.CompareTag("Player")){
+            other.gameObject.transform.SetParent(this.gameObject.transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.CompareTag("Player")){
+            other.gameObject.transform.SetParent(null); //currently, momentum is halted completely upon exiting the platform's collider
+        }
+    }
 }
