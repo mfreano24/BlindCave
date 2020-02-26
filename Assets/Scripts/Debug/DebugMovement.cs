@@ -10,6 +10,7 @@ public class DebugMovement : MonoBehaviour
     int hSpeed;
     bool isJumping;
     float jumpHeight;
+    private Vector3 parentVelocity;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,6 +48,17 @@ public class DebugMovement : MonoBehaviour
         if (other.gameObject.name == "Hazard") {
 			DeathToPlayer();
 		}
+    }
+
+    public void MaintainMomentum()
+    {   //check to see if parent is not null
+        if((transform.parent != null) && (transform.parent.GetComponent<PlatformMovement>() != null))
+        {
+            PlatformMovement pVelocity = this.GetComponentInParent<PlatformMovement>();
+            Vector3 parentVelocity = pVelocity.velocity;
+            //rb.velocity = new Vector3(rb.velocity.x + pVelocity.x, jumpHeight, 0);
+            Debug.Log("Platform Velocity: " + pVelocity);
+        }
     }
 
     void DeathToPlayer(){

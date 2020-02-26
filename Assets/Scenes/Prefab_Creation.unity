@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 173512489}
   m_Layer: 0
   m_Name: FloatingPlatform
-  m_TagString: Untagged
+  m_TagString: FloatingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.5
   frequency: 1
+  velocity: {x: 0, y: 0, z: 0}
   moveType: 0
 --- !u!1 &185276197 stripped
 GameObject:
@@ -426,7 +427,7 @@ GameObject:
   - component: {fileID: 593769413}
   m_Layer: 0
   m_Name: SpritePlatform
-  m_TagString: Untagged
+  m_TagString: FloatingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,7 +446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 2
   frequency: 3
-  moveType: 5
+  velocity: {x: 0, y: 0, z: 0}
+  moveType: 0
 --- !u!61 &593769410
 BoxCollider2D:
   m_ObjectHideFlags: 0

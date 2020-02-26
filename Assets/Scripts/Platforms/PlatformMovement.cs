@@ -8,10 +8,12 @@ public class PlatformMovement : MonoBehaviour
     //private
     private Vector3 startPosition;
     private float calculatedAmplitude;
-    
+    private Vector3 lastPosition;
     //public
     public float amplitude = .5f;
     public float frequency = 1f;
+
+    public Vector3 velocity;// FIX: potentially need to make private, public to see what the value is
 
     public enum movementType {
         Horizontal, Vertical, TLDiagonal, TRDiagonal, BLDiagonal, BRDiagonal
@@ -25,13 +27,15 @@ public class PlatformMovement : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        lastPosition = transform.position;
         calculatedAmplitude = amplitude / (2 * Mathf.PI);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
         switch (moveType)
         {
             case movementType.Horizontal:
@@ -91,6 +95,8 @@ public class PlatformMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.CompareTag("Player")){
+            DebugMovement playerMovement = other.GetComponent<DebugMovement>();
+            playerMovement.MaintainMomentum(); //need to either have the parent not set to null, or maybe pass the velocity to the other function
             other.gameObject.transform.SetParent(null); //currently, momentum is halted completely upon exiting the platform's collider
         }
     }
