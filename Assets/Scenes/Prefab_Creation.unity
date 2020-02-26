@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 2
   frequency: 3
-  moveType: 0
+  moveType: 5
 --- !u!61 &593769410
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -529,7 +529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593769408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.72, y: -0.68, z: 0}
+  m_LocalPosition: {x: -15.78, y: -0.55, z: 0}
   m_LocalScale: {x: 6.2987776, y: 0.64606065, z: 1.0471}
   m_Children: []
   m_Father: {fileID: 0}

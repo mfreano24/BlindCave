@@ -14,8 +14,10 @@ public class PlatformMovement : MonoBehaviour
     public float frequency = 1f;
 
     public enum movementType {
-        Horizontal, Vertical, Diagonal
+        Horizontal, Vertical, TLDiagonal, TRDiagonal, BLDiagonal, BRDiagonal
     };  
+    //For diagonal movements the TL = top left, TR = top right BL = bottom left BR = bottom right
+    //Platform starts in the "center" and moves towards the direction indicated
     public movementType moveType; 
     
 
@@ -44,8 +46,37 @@ public class PlatformMovement : MonoBehaviour
                 startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
                 transform.position = startPosition;
                 break;
-            case movementType.Diagonal:
-                Debug.Log("Diagonal");
+            case movementType.TLDiagonal:
+                Debug.Log("TLDiagonal");
+                //<-1,1>
+                startPosition = transform.position;
+                startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                transform.position = startPosition;
+                break;
+            case movementType.TRDiagonal:
+                Debug.Log("TRDiagonal");
+                //<1,1>
+                startPosition = transform.position;
+                startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                transform.position = startPosition;
+                break;
+            case movementType.BLDiagonal:
+                Debug.Log("BLDiagonal");
+                //<-1,-1>
+                startPosition = transform.position;
+                startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                transform.position = startPosition;
+                break;
+            case movementType.BRDiagonal:
+                Debug.Log("BRDiagonal");
+                //<1,-1>
+                startPosition = transform.position;
+                startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+                transform.position = startPosition;
                 break;
         }
 
