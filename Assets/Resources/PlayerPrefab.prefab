@@ -153,6 +153,7 @@ MonoBehaviour:
   jumpHeight: 6
   hSpeed: 5
   jumpPower: 15
+  onButton: 0
 --- !u!114 &5498405660299315804
 MonoBehaviour:
   m_ObjectHideFlags: 0

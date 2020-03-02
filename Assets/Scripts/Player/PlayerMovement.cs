@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     GameObject light_inst;
     GameObject p1_backing;
     GameObject p2_backing;
+    GameObject cam;
     
     Rigidbody2D rb;
 	GlobalVars gv;
@@ -49,6 +50,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     private int directionFacing = 1;
     private bool isJumping = false;
     int flipped;
+
+    public bool onButton;
+
 
 
 
@@ -69,12 +73,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         on network, we want the local player's light to be small and to follow them and the nonlocal player's light to be big and light up the whole room.
         */
         if(this.gameObject.name == "P1"){
-            this.transform.position = new Vector3(-8.3f, 11f, 0f);
+            this.transform.position = new Vector3(gv.p1ResetPos[gv.level].x, gv.p1ResetPos[gv.level].y , 0f);
 
         }
 
         else if(this.gameObject.name == "P2"){
-            this.transform.position = new Vector3(-8.3f, -8f, 0f);
+            this.transform.position = new Vector3(gv.p2ResetPos[gv.level].x, gv.p2ResetPos[gv.level].y , 0f);
         }
 
         p1_backing = GameObject.Find("P1_BackingMask");
@@ -136,8 +140,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         }
         //some problems here, will get fixed surely :)
         flipped = 1;
-
-        
+        onButton = false;
+        cam = GameObject.Find(this.gameObject.name+"_Camera");
     }
 
     void FixedUpdate() {
@@ -207,6 +211,20 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 		}
         //transform.localScale = defScale;
         //playerSpeed = defSpeed;
+    }
+
+
+    public void advanceLevel(){
+        if(this.gameObject.name == "P1"){
+            transform.position = new Vector3 (gv.p1ResetPos[gv.level].x, gv.p1ResetPos[gv.level].y , 0f);
+            cam.transform.position = new Vector3 (gv.p1camPos[gv.level].x, gv.p1camPos[gv.level].y , -10f);
+        }
+
+        else if(this.gameObject.name == "P2"){
+            transform.position = new Vector3 (gv.p2ResetPos[gv.level].x, gv.p2ResetPos[gv.level].y , 0f);
+            cam.transform.position = new Vector3 (gv.p2camPos[gv.level].x, gv.p2camPos[gv.level].y , -10f);
+        }
+
     }
 
 
