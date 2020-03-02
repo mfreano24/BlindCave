@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class DebugMovement : MonoBehaviour
 {
+    //MOVEMENT
     Rigidbody2D rb;
     int flipped;
     int hSpeed;
     bool isJumping;
     float jumpHeight;
+    float fallMult = 2.5f;
+    float lowMult = 2f;
     private Vector3 parentVelocity;
     void Start()
     {
@@ -39,6 +42,14 @@ public class DebugMovement : MonoBehaviour
         }
         if(rb.velocity.y == 0){
             isJumping = false;
+        }
+        if(rb.velocity.y < 0){
+            //falling condition for smoother jumping
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMult-1) * Time.deltaTime;
+        }
+        else if(rb.velocity.y > 0 && !Input.GetButton("Jump")){
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowMult-1) * Time.deltaTime;
+
         }
         
     }
