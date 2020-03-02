@@ -69,15 +69,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         rb = GetComponent<Rigidbody2D>();
 		gv = GameObject.Find("EventSystem").GetComponent<GlobalVars>();
 
-        /*
-        on network, we want the local player's light to be small and to follow them and the nonlocal player's light to be big and light up the whole room.
-        */
+        
         if(this.gameObject.name == "P1"){
+            gv.setP1(this.gameObject);
             this.transform.position = new Vector3(gv.p1ResetPos[gv.level].x, gv.p1ResetPos[gv.level].y , 0f);
 
         }
 
         else if(this.gameObject.name == "P2"){
+            gv.setP2(this.gameObject);
             this.transform.position = new Vector3(gv.p2ResetPos[gv.level].x, gv.p2ResetPos[gv.level].y , 0f);
         }
 
@@ -172,7 +172,23 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         if(rb.velocity.y == 0){
             isJumping = false;
         }
+        if(rb.velocity.y < 0){
+            //falling condition for smoother jumping
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (2.5f-1) * Time.deltaTime;
+        }
+        else if(rb.velocity.y > 0 && !Input.GetButton("Jump")){
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (2-1) * Time.deltaTime;
+
+        }
         
+    }
+
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.L)){
+            //debug purposes
+            Debug.Log("On button: " + onButton);
+        }
     }
 
 	// TODO: Wall jumping is possible and we gotta remove it?
@@ -226,6 +242,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         }
 
     }
+
 
 
 }

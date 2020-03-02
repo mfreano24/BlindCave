@@ -20,6 +20,8 @@ public class GlobalVars : MonoBehaviour {
 	public GameObject player2;
 
 	private void Start() {
+		player1 = null;
+		player2 = null;
 		p1ResetPos = new List<Vector2>(){
 			new Vector2(-11.2f, 11), //1
 			new Vector2(12.71f, 7.74f) //2
@@ -43,23 +45,27 @@ public class GlobalVars : MonoBehaviour {
 	}
 
 	private void Update() {
-		if(player1 == null){
-			player1 = GameObject.Find("P1");
-			Debug.Log("P1 Assigned!");
-		}
-		if(player2 == null){
-			player2 = GameObject.Find("P2");
-			Debug.Log("P2 Assigned!");
-		}
 
 		//buttoncheck
 		//PRESS K FOR DEBUG MODE ADVANCE
-		if(/*(player1.GetComponent<PlayerMovement>().onButton && player2.GetComponent<PlayerMovement>().onButton) ||*/ Input.GetKeyDown(KeyCode.K)){
+		if(Input.GetKeyDown(KeyCode.K) || ((player1 !=null && player2 !=null) && 
+		  (player1.GetComponent<PlayerMovement>().onButton && player2.GetComponent<PlayerMovement>().onButton))){
 			level++;
 			Debug.Log("Level " + level);
 			player1.GetComponent<PlayerMovement>().advanceLevel();
 			player2.GetComponent<PlayerMovement>().advanceLevel();
 		}
 	}
+
+
+	public void setP1(GameObject p){
+		player1 = p;
+		Debug.Log("P1 Assigned!");
+	}
+	public void setP2(GameObject p){
+		player2 = p;
+		Debug.Log("P2 Assigned!");
+	}
+
 
 }
