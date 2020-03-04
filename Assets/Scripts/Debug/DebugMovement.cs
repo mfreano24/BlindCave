@@ -14,6 +14,7 @@ public class DebugMovement : MonoBehaviour
     float fallMult = 2.5f;
     float lowMult = 2f;
     private Vector3 parentVelocity;
+    public int directionFacing;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +29,14 @@ public class DebugMovement : MonoBehaviour
     void FixedUpdate() {
 		float xInput = (flipped) * Input.GetAxis("Horizontal");
         rb.velocity = new Vector3((xInput * hSpeed), rb.velocity.y, 0);
+        if(xInput >= 0){
+            directionFacing = 1;
+            //we need to save the previous input lmao
+        }
+        else if(xInput < 0){
+            directionFacing = -1;
+        }
+
 
         //if grounded
         if(rb.velocity.y != 0) {

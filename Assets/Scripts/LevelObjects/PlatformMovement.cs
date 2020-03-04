@@ -28,7 +28,7 @@ public class PlatformMovement : MonoBehaviour
     {
         startPosition = transform.position;
         lastPosition = transform.position;
-        calculatedAmplitude = amplitude / (2 * Mathf.PI);
+        calculatedAmplitude = 0.25f * (amplitude / (Mathf.PI));
     }
 
     // Update is called once per frame
