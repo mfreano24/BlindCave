@@ -40,7 +40,7 @@ public class Totems : MonoBehaviour
             this.transform.parent = other.gameObject.transform;
             carry = true;
         }
-        else if(Input.GetButtonDown("Pickup") && other.CompareTag("Player") && carry){
+        else if(Input.GetButtonDown("Pickup") && carry){
             Debug.Log("Put down!");
             this.transform.position = new Vector3(other.gameObject.transform.position.x + other.gameObject.GetComponent<DebugMovement>().directionFacing, 
                 other.gameObject.transform.position.y , 
