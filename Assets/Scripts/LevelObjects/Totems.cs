@@ -42,9 +42,64 @@ public class Totems : MonoBehaviour
         }
         else if(Input.GetButtonDown("Pickup") && carry){
             Debug.Log("Put down!");
-            this.transform.position = new Vector3(other.gameObject.transform.position.x + other.gameObject.GetComponent<DebugMovement>().directionFacing, 
-                other.gameObject.transform.position.y , 
-                other.gameObject.transform.position.z);
+            Debug.Log("Before drop position (" + transform.position+")");
+
+
+            if(GetComponentInParent<DebugMovement>() != null)
+            {
+                Debug.Log("Parent component exists");
+                int directionFacing = GetComponentInParent<DebugMovement>().directionFacing;
+                Debug.Log("directionFacing: " + directionFacing);
+                Debug.Log("Parents transform position: " + transform.parent.position.x + ", " + transform.parent.position.y + ", " + transform.parent.position.z);
+                this.transform.position = new Vector3(transform.parent.position.x + directionFacing,
+                    transform.parent.position.y,
+                    transform.parent.position.z);
+
+            }
+            else
+            {
+                Debug.Log("Parent component null");
+            }
+
+            //if(other.CompareTag("Player"))
+            //{
+            //    Debug.Log("Other Tag is player");
+            //}
+            //else
+            //{
+            //    Debug.Log("Not the player");
+            //}
+            //if(player != null)
+            //{
+            //    Debug.Log("Player not null");
+            //    int directionFacing = player.GetComponent<DebugMovement>().directionFacing;
+            //    Debug.Log("directionFacing: " + directionFacing);
+            //    this.transform.position = new Vector3(other.gameObject.transform.position.x + directionFacing,
+            //        other.gameObject.transform.position.y,
+            //        other.gameObject.transform.position.z);
+            //}
+            //else
+            //{
+            //    Debug.Log("Player is null");
+            //}
+
+
+            //var PlayerObject = other.GetComponent<DebugMovement>();
+            //int directionFacing = PlayerObject.GetDirectionFacing();
+            //Debug.Log("Direction Facing: " + directionFacing);
+            //if(other.gameObject.GetComponent<DebugMovement>() != null)
+            //{
+            //    Debug.Log("Other Component is not null");
+            //}
+            //else
+            //{
+            //    Debug.Log("Other Component is null");
+            //}
+            //Debug.Log("Other object direction facing: " + other.gameObject.GetComponent<DebugMovement>().directionFacing);
+            //this.transform.position = new Vector3(other.gameObject.transform.position.x + other.gameObject.GetComponent<DebugMovement>().directionFacing, 
+            //    other.gameObject.transform.position.y , 
+            //    other.gameObject.transform.position.z);
+            Debug.Log("After drop position (" + transform.position + ")");
             this.transform.parent = null;
             carry = false;
         }

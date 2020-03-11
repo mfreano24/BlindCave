@@ -84,4 +84,9 @@ public class DebugMovement : MonoBehaviour
     void DeathToPlayer(){
         transform.position = new Vector3(-8, -1.5f, -2);
     }
+
+    public int GetDirectionFacing()
+    {
+        return directionFacing;
+    }
 }
