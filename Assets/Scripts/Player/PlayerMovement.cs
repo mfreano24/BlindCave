@@ -65,18 +65,39 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
     }
     void Start() {
-        this.gameObject.name = "P" + PhotonNetwork.PlayerList.Length.ToString();
+        //we are gonna do this the hard way i guess
+        if(this.gameObject == LocalPlayerInstance && PhotonNetwork.PlayerList.Length == 1){
+            Debug.Log("Name scheme #1");
+            this.gameObject.name = "P1";
+        }
+        else if(this.gameObject == LocalPlayerInstance && PhotonNetwork.PlayerList.Length == 2){
+            Debug.Log("Name scheme #2");
+            this.gameObject.name = "P2";
+        }
+        else if(this.gameObject != LocalPlayerInstance && GameObject.Find("P1") == null){
+            Debug.Log("Name scheme #3");
+            this.gameObject.name = "P1";
+        }
+        else if(GameObject.Find("P1") != null && this.gameObject != LocalPlayerInstance){
+            Debug.Log("Name scheme #4");
+            this.gameObject.name = "P2";
+        }
+        
+
+        
         rb = GetComponent<Rigidbody2D>();
 		gv = GameObject.Find("EventSystem").GetComponent<GlobalVars>();
 
         
         if(this.gameObject.name == "P1"){
+            Debug.Log("Set Player 1!");
             gv.setP1(this.gameObject);
             this.transform.position = new Vector3(gv.p1ResetPos[gv.level].x, gv.p1ResetPos[gv.level].y , 0f);
 
         }
 
         else if(this.gameObject.name == "P2"){
+            Debug.Log("Set Player 2!");
             gv.setP2(this.gameObject);
             this.transform.position = new Vector3(gv.p2ResetPos[gv.level].x, gv.p2ResetPos[gv.level].y , 0f);
         }
@@ -142,6 +163,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         flipped = 1;
         onButton = false;
         cam = GameObject.Find(this.gameObject.name+"_Camera");
+        DontDestroyOnLoad(cam);
     }
 
     void FixedUpdate() {
@@ -230,18 +252,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     }
 
 
-    public void advanceLevel(){
-        if(this.gameObject.name == "P1"){
-            transform.position = new Vector3 (gv.p1ResetPos[gv.level].x, gv.p1ResetPos[gv.level].y , 0f);
-            cam.transform.position = new Vector3 (gv.p1camPos[gv.level].x, gv.p1camPos[gv.level].y , -10f);
-        }
-
-        else if(this.gameObject.name == "P2"){
-            transform.position = new Vector3 (gv.p2ResetPos[gv.level].x, gv.p2ResetPos[gv.level].y , 0f);
-            cam.transform.position = new Vector3 (gv.p2camPos[gv.level].x, gv.p2camPos[gv.level].y , -10f);
-        }
-
-    }
+    
 
 
 

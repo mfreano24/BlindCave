@@ -19,12 +19,14 @@ public class Button : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){
             other.gameObject.GetComponent<PlayerMovement>().onButton = true;
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0,0,1); //signify change lol
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.CompareTag("Player")){
             other.gameObject.GetComponent<PlayerMovement>().onButton = false;
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1,1);
         }
     }
 

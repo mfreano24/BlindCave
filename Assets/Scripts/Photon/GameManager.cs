@@ -10,12 +10,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     #region Interactions
     
-    //P1 EXCLUSIVE
-    public GameObject P1_darkmask;
-    public GameObject P1_cavelight;
-    //P2 EXCLUSIVE
-    public GameObject P2_darkmask;
-    public GameObject P2_cavelight;
+    GameObject P1;
+    GameObject P2;
 
 
 
@@ -82,6 +78,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 player_inst = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f,5f,0f), Quaternion.identity, 0);
+                
             }
             else{
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
@@ -91,6 +88,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         
         
     }
+
 
 
     public void LeaveRoom()
@@ -109,7 +107,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
 
-        PhotonNetwork.LoadLevel("Game_Level");//THIS WILL BE CHANGED LATER!!!!!!!!!!!!!!!!!!!!!!!
+        PhotonNetwork.LoadLevel("Game_Level");
     }
 
     #endregion
