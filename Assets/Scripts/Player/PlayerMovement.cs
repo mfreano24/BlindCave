@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     public static GameObject LocalPlayerInstance;
     public GameObject playerlightPrefab;
     public GameObject cavelightPrefab;
+    public GameObject pauseScreen;
     GameObject light_inst;
     GameObject p1_backing;
     GameObject p2_backing;
@@ -82,6 +83,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log("Name scheme #4");
             this.gameObject.name = "P2";
         }
+
+        
         
 
         
@@ -164,6 +167,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         onButton = false;
         cam = GameObject.Find(this.gameObject.name+"_Camera");
         DontDestroyOnLoad(cam);
+
+
+        pauseScreen = GameObject.FindGameObjectWithTag("Pause");
+        pauseScreen.SetActive(false);
     }
 
     void FixedUpdate() {
@@ -211,6 +218,13 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             //debug purposes
             Debug.Log("On button: " + onButton);
         }
+
+        if(Input.GetButtonDown("Pause") && pauseScreen.active){
+            pauseScreen.SetActive(false);
+        }
+        else if(Input.GetButtonDown("Pause") && !pauseScreen.active){
+            pauseScreen.SetActive(true);
+        }
     }
 
 	// TODO: Wall jumping is possible and we gotta remove it?
@@ -249,6 +263,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 		}
         //transform.localScale = defScale;
         //playerSpeed = defSpeed;
+    }
+
+    public void Quit(){
+        PhotonNetwork.Disconnect();
     }
 
 

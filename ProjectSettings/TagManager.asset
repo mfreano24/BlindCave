@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Map
   - FloatingPlatform
+  - Pause
   layers:
   - Default
   - TransparentFX
