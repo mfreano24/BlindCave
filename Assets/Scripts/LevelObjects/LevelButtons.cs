@@ -72,4 +72,16 @@ public class LevelButtons : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Totem"))
+        {
+            Debug.Log("Colliding with a totem");
+        }
+        else
+        {
+            Debug.Log("NOT Totem");
+        }
+    }
+
 }
