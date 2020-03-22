@@ -195,7 +195,7 @@ PrefabInstance:
     - target: {fileID: 2349102452114861655, guid: 649f78561e7e70f43901a5861ea3f90d,
         type: 3}
       propertyPath: moveType
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2349102452114861655, guid: 649f78561e7e70f43901a5861ea3f90d,
         type: 3}

@@ -34,67 +34,120 @@ public class PlatformMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocity = (transform.position - lastPosition) / Time.deltaTime;
-        lastPosition = transform.position;
         switch (moveType)
         {
             case movementType.Horizontal:
-                Debug.Log("Horizontal");
-                startPosition = transform.position;
-                startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                transform.position = startPosition;
+                HorizontalMovement();
                 break;
             case movementType.Vertical:
-                Debug.Log("Vertical");
-                startPosition = transform.position;
-                startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                transform.position = startPosition;
+                VerticalMovement();
                 break;
             case movementType.TLDiagonal:
-                Debug.Log("TLDiagonal");
-                //<-1,1>
-                startPosition = transform.position;
-                startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                transform.position = startPosition;
+                TLDiagonalMovment();
                 break;
             case movementType.TRDiagonal:
-                Debug.Log("TRDiagonal");
-                //<1,1>
-                startPosition = transform.position;
-                startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                transform.position = startPosition;
+                TRDiagonalMovement();
                 break;
             case movementType.BLDiagonal:
-                Debug.Log("BLDiagonal");
-                //<-1,-1>
-                startPosition = transform.position;
-                startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                transform.position = startPosition;
+                BLDiagonalMovement();
                 break;
             case movementType.BRDiagonal:
-                Debug.Log("BRDiagonal");
-                //<1,-1>
-                startPosition = transform.position;
-                startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-                transform.position = startPosition;
+                BRDiagonalMovement();
                 break;
             case movementType.RoatateLeft:
-                Debug.Log("RotateLeft");
-                transform.Rotate(Vector3.forward);
+                RotateLeftMovement();
                 break;
             case movementType.RotateRight:
-                Debug.Log("RotateRight");
-                transform.Rotate(Vector3.back);
+                RotateRightMovement();
                 break;
         }
 
     }
 
+    private void HorizontalMovement()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("Horizontal");
+        startPosition = transform.position;
+        startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        transform.position = startPosition;
+    }
 
+    private void VerticalMovement()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("Vertical");
+        startPosition = transform.position;
+        startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        transform.position = startPosition;
+    }
+
+    private void TLDiagonalMovment()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("TLDiagonal");
+        //<-1,1>
+        startPosition = transform.position;
+        startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        transform.position = startPosition;
+    }
+
+    private void TRDiagonalMovement()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("TRDiagonal");
+        //<1,1>
+        startPosition = transform.position;
+        startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        transform.position = startPosition;
+    }
+
+    private void BLDiagonalMovement()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("BLDiagonal");
+        //<-1,-1>
+        startPosition = transform.position;
+        startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        transform.position = startPosition;
+    }
+
+    private void BRDiagonalMovement()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("BRDiagonal");
+        //<1,-1>
+        startPosition = transform.position;
+        startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        transform.position = startPosition;
+    }
+
+    private void RotateLeftMovement()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("RotateLeft");
+        transform.Rotate(Vector3.forward);
+
+    }
+
+    private void RotateRightMovement()
+    {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
+        Debug.Log("RotateRight");
+        transform.Rotate(Vector3.back);
+    }
     private void OnTriggerStay2D(Collider2D other) {
         if(other.CompareTag("Player")){
             other.gameObject.transform.SetParent(this.gameObject.transform);
