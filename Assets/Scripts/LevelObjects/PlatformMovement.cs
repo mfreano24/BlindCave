@@ -16,7 +16,7 @@ public class PlatformMovement : MonoBehaviour
     public Vector3 velocity;// FIX: potentially need to make private, public to see what the value is
 
     public enum movementType {
-        Horizontal, Vertical, TLDiagonal, TRDiagonal, BLDiagonal, BRDiagonal
+        Horizontal, Vertical, TLDiagonal, TRDiagonal, BLDiagonal, BRDiagonal, RoatateLeft, RotateRight
     };  
     //For diagonal movements the TL = top left, TR = top right BL = bottom left BR = bottom right
     //Platform starts in the "center" and moves towards the direction indicated
@@ -81,6 +81,14 @@ public class PlatformMovement : MonoBehaviour
                 startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
                 startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
                 transform.position = startPosition;
+                break;
+            case movementType.RoatateLeft:
+                Debug.Log("RotateLeft");
+                transform.Rotate(Vector3.forward);
+                break;
+            case movementType.RotateRight:
+                Debug.Log("RotateRight");
+                transform.Rotate(Vector3.back);
                 break;
         }
 
