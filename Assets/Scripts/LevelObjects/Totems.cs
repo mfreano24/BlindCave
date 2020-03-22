@@ -21,8 +21,14 @@ public class Totems : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Carry = " + carry); 
-        
+        Debug.Log("Carry = " + carry);
+
+        if (Input.GetButtonDown("Pickup"))
+        {
+            Debug.Log("Pickup Pressed");
+        }
+
+
     }
 
     private void FixedUpdate()
@@ -32,15 +38,25 @@ public class Totems : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
+
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Other tag is player");
+        }
+        else
+        {
+            Debug.Log("Other tag is NOT player");
+        }
+
         //picking up the totem
-        if(Input.GetButtonDown("Pickup") && other.CompareTag("Player") && !carry){
+        if(Input.GetButtonDown("Pickup") && !carry){//other.CompareTag("Player")
             Debug.Log("Picked up!");
             this.transform.position = new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y + 0.25f, 
             other.gameObject.transform.position.z);
             this.transform.parent = other.gameObject.transform;
             carry = true;
         }
-        else if(Input.GetButtonDown("Pickup") && other.CompareTag("Player") && carry){
+        else if(Input.GetButtonDown("Pickup") && carry){
             Debug.Log("Put down!");
             Debug.Log("Before drop position (" + transform.position+")");
 
