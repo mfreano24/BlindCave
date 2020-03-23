@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject cavelightPrefab;
     public GameObject pauseScreen;
     GameObject light_inst;
+    GameObject backlight_inst;
     GameObject p1_backing;
     GameObject p2_backing;
     GameObject cam;
@@ -118,16 +119,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             lb.color = new Color(242f/255f, 216f/255f, 114f/255f);
             lb.range = 4.5f;
             lb.intensity = 1;
+
+            backlight_inst = Instantiate(cavelightPrefab);
+            backlight_inst.gameObject.name = "P2_backlight";
+            backlight_inst.transform.parent = GameObject.Find("P2_Camera").transform;
+
+
+
             
-            //p2 area light
-            /*light_inst = Instantiate(cavelightPrefab);
-            light_inst.gameObject.name = "P2_light";
-            light_inst.GetComponent<LightBall>().isPlayerLight(false);
-            light_inst.transform.parent = GameObject.Find("P2_Camera").transform;
-            lb =  light_inst.GetComponent<Light>();
-            lb.color = new Color(190f/255f, 161f/255f, 108f/255f);
-            lb.range = 40;
-            lb.intensity = 5;*/
+            
 
 
             //p2 camera backing
@@ -147,15 +147,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             lb.range = 3;
             lb.intensity = 1;
 
-            /*p2 area light
-            light_inst = Instantiate(cavelightPrefab);
-            light_inst.gameObject.name = "P1_light";
-            light_inst.GetComponent<LightBall>().isPlayerLight(false);
-            light_inst.transform.parent = GameObject.Find("P1_Camera").transform;
-            lb =  light_inst.GetComponent<Light>();
-            lb.color = new Color(190f/255f, 161f/255f, 108f/255f);
-            lb.range = 40;
-            lb.intensity = 5;*/
+            backlight_inst = Instantiate(cavelightPrefab);
+            backlight_inst.gameObject.name = "P1_backlight";
+            backlight_inst.transform.parent = GameObject.Find("P1_Camera").transform;
 
             //p1 backing
             p1_backing.SetActive(false);
