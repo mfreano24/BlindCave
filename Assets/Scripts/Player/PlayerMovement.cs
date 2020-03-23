@@ -122,7 +122,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
             backlight_inst = Instantiate(cavelightPrefab);
             backlight_inst.gameObject.name = "P2_backlight";
-            backlight_inst.transform.parent = GameObject.Find("P2_Camera").transform;
+            GameObject cam_tmp = GameObject.Find("P2_Camera");
+            backlight_inst.transform.position = new Vector3(cam_tmp.transform.position.x, cam_tmp.transform.position.y, backlight_inst.transform.position.z);
+            backlight_inst.transform.parent = cam_tmp.transform;
+            backlight_inst.GetComponent<Light>().range /= 2;
 
 
 
@@ -131,8 +134,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
 
             //p2 camera backing
-            p2_backing.SetActive(false);
-            //p1_backing.SetActive(true);
+            p2_backing.SetActive(true);
+            p1_backing.SetActive(true);
 
         }
 
@@ -149,10 +152,13 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
             backlight_inst = Instantiate(cavelightPrefab);
             backlight_inst.gameObject.name = "P1_backlight";
-            backlight_inst.transform.parent = GameObject.Find("P1_Camera").transform;
+            GameObject cam_tmp = GameObject.Find("P1_Camera");
+            backlight_inst.transform.position = new Vector3(cam_tmp.transform.position.x, cam_tmp.transform.position.y, backlight_inst.transform.position.z);
+            backlight_inst.transform.parent = cam_tmp.transform;
+            backlight_inst.GetComponent<Light>().range /= 2;
 
             //p1 backing
-            p1_backing.SetActive(false);
+            p1_backing.SetActive(true);
             p2_backing.SetActive(true);
 
         }

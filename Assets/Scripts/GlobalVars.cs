@@ -51,7 +51,7 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 		};
 		
 		p2ResetPos = new List<Vector2>() {
-			new Vector2(-12.26f, -8.33f), //1
+			new Vector2(-12.26f, -29.59f), //1
 			new Vector2(12.71f, -8.33f) //2
 		};
 
@@ -61,7 +61,7 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 		};
 
 		p2camPos = new List<Vector2>(){
-			new Vector2(-5.65f, -6.85f),
+			new Vector2(-5.65f, -28.4f),
 			new Vector2(19.5f, -6.85f)
 		};
 
