@@ -1,10 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 
-public class PlatformMovement : MonoBehaviour
+public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
 {
+
+    #region IPunObservable Implementation
+    float lag;
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+        
+        if(stream.IsWriting){
+            stream.SendNext(transform.position);
+        }
+        else{
+            transform.position = (Vector3)stream.ReceiveNext();
+            //may need some lag reduc
+        }
+    }
+    #endregion
     //private
     private Vector3 startPosition;
     private float calculatedAmplitude;
@@ -156,7 +172,7 @@ public class PlatformMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.CompareTag("Player")){
-            DebugMovement playerMovement = other.GetComponent<DebugMovement>();
+            PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
             playerMovement.MaintainMomentum(); //need to either have the parent not set to null, or maybe pass the velocity to the other function
             other.gameObject.transform.SetParent(null); //currently, momentum is halted completely upon exiting the platform's collider
         }

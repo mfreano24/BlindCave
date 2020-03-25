@@ -233,6 +233,18 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         death();
     }
 
+
+    public void MaintainMomentum()
+    {   //check to see if parent is not null
+        if((transform.parent != null) && (transform.parent.GetComponent<PlatformMovement>() != null))
+        {
+            PlatformMovement pVelocity = this.GetComponentInParent<PlatformMovement>();
+            Vector3 parentVelocity = pVelocity.velocity;
+            //rb.velocity = new Vector3(rb.velocity.x + pVelocity.x, jumpHeight, 0);
+            Debug.Log("Platform Velocity: " + pVelocity);
+        }
+    }
+
 	// Collision with Spikes
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.name == "Hazard") {
