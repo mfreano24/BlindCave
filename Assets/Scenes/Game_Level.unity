@@ -1835,7 +1835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9043351f8c7db4fa1fb459aa2089e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: {x: 50.32, y: -27.19, z: 0}
+  max: {x: 50.32, y: -26.49, z: 0}
   min: {x: 50.32, y: -34.3, z: 0}
   divbase: 75
   bound: 1.2

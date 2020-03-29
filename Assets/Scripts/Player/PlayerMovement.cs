@@ -203,7 +203,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         }
         if(rb.velocity.y < 0){
             //falling condition for smoother jumping
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (2.5f-1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (4f-1) * Time.deltaTime;
         }
         else if(rb.velocity.y > 0 && !Input.GetButton("Jump")){
             rb.velocity += Vector2.up * Physics2D.gravity.y * (2-1) * Time.deltaTime;
