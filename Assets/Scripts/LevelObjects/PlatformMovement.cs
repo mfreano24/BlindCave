@@ -30,6 +30,8 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
     public float frequency = 1f;
 
     public Vector3 velocity;// FIX: potentially need to make private, public to see what the value is
+    bool moving;
+    float timeOffset;
 
     public enum movementType {
         Horizontal, Vertical, TLDiagonal, TRDiagonal, BLDiagonal, BRDiagonal, RoatateLeft, RotateRight
@@ -45,6 +47,7 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         startPosition = transform.position;
         lastPosition = transform.position;
         calculatedAmplitude = 0.25f * (amplitude / (Mathf.PI));
+        moving = false;
     }
 
     // Update is called once per frame
@@ -77,7 +80,6 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
                 RotateRightMovement();
                 break;
         }
-
     }
 
     private void HorizontalMovement()
@@ -86,7 +88,7 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         lastPosition = transform.position;
         Debug.Log("Horizontal");
         startPosition = transform.position;
-        startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.x += Mathf.Sin((float)PhotonNetwork.Time * frequency) * calculatedAmplitude;
         transform.position = startPosition;
     }
 
@@ -96,7 +98,7 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         lastPosition = transform.position;
         Debug.Log("Vertical");
         startPosition = transform.position;
-        startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.y += Mathf.Sin((float)PhotonNetwork.Time * frequency) * calculatedAmplitude;
         transform.position = startPosition;
     }
 
@@ -107,8 +109,8 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("TLDiagonal");
         //<-1,1>
         startPosition = transform.position;
-        startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-        startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.x -= Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
+        startPosition.y += Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
         transform.position = startPosition;
     }
 
@@ -119,8 +121,8 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("TRDiagonal");
         //<1,1>
         startPosition = transform.position;
-        startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-        startPosition.y += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.x += Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
+        startPosition.y += Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
         transform.position = startPosition;
     }
 
@@ -131,8 +133,8 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("BLDiagonal");
         //<-1,-1>
         startPosition = transform.position;
-        startPosition.x -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-        startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.x -= Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
+        startPosition.y -= Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
         transform.position = startPosition;
     }
 
@@ -143,8 +145,8 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("BRDiagonal");
         //<1,-1>
         startPosition = transform.position;
-        startPosition.x += Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
-        startPosition.y -= Mathf.Sin(Time.time * frequency) * calculatedAmplitude;
+        startPosition.x += Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
+        startPosition.y -= Mathf.Sin((float)PhotonNetwork.Time  * frequency) * calculatedAmplitude;
         transform.position = startPosition;
     }
 
@@ -164,6 +166,17 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("RotateRight");
         transform.Rotate(Vector3.back);
     }
+
+
+
+    public void startMoving(float c){
+        moving = true;
+        timeOffset = c;
+    }
+
+
+
+    
     private void OnTriggerStay2D(Collider2D other) {
         if(other.CompareTag("Player")){
             other.gameObject.transform.SetParent(this.gameObject.transform);

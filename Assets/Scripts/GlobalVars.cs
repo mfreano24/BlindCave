@@ -49,6 +49,8 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 	public GameObject button2;
 
 	bool cooldown;
+	float offsetTime;
+	bool platformsMoving;
 
 	private void Start() {
 		button1 = GameObject.Find("P1L1");
@@ -56,6 +58,7 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 		player1 = null;
 		player2 = null;
 		cooldown = false;
+
 
 		p1ResetPos = new List<Vector2>(){
 			new Vector2(-11.2f, 11), //1
@@ -115,6 +118,20 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 			advanceLevel();
 			photonView.RPC("advanceLevel", RpcTarget.All);
 		}
+
+		/*
+		if(PhotonNetwork.PlayerList.Length == 1){
+			offsetTime = Time.time;
+			Debug.Log("Time.time: " +Time.time);
+		}
+		else if(PhotonNetwork.PlayerList.Length == 2 && !platformsMoving){
+			//THIS RUNS ONE TIME ONLY
+			platformsMoving = true;
+			Debug.Log("Offset: " + offsetTime + "\t" + Time.time);
+			foreach(GameObject e in GameObject.FindGameObjectsWithTag("FloatingPlatform")){
+				e.GetComponent<PlatformMovement>().startMoving(offsetTime);
+			}
+		}*/
 	}
 
 	IEnumerator resetCooldown(){
