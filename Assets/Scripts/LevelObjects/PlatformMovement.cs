@@ -13,10 +13,17 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
         
         if(stream.IsWriting){
-            stream.SendNext(transform.position);
+            
+            if(enabled){
+                stream.SendNext(transform.position);
+            }
+            
         }
         else{
-            transform.position = (Vector3)stream.ReceiveNext();
+            if(!enabled){
+                transform.position = (Vector3)stream.ReceiveNext();
+            }
+            
             //may need some lag reduc
         }
     }
@@ -30,8 +37,19 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
     public float frequency = 1f;
 
     public Vector3 velocity;// FIX: potentially need to make private, public to see what the value is
-    bool moving;
+    bool movementLocal;
     float timeOffset;
+
+    int direction; //1 or -1, depending on the direction.
+    Vector3 maximum;
+    Vector3 minimum;
+
+    /*
+    * DESIGN: Define two positions that are max and min, those will be "horizontal asymptotes" of the platform's movement path.
+    *
+    *
+    */
+
 
     public enum movementType {
         Horizontal, Vertical, TLDiagonal, TRDiagonal, BLDiagonal, BRDiagonal, RoatateLeft, RotateRight
@@ -44,42 +62,55 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
+        if(PhotonNetwork.PlayerList.Length == 1){
+            enabled = true;
+        }
+        else{
+            enabled = false;
+        }
+        //Purpose of enabled is so that the platform can just sync in the 2nd player's game instead of calculating its position on both ends.
         startPosition = transform.position;
         lastPosition = transform.position;
         calculatedAmplitude = 0.25f * (amplitude / (Mathf.PI));
-        moving = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (moveType)
-        {
-            case movementType.Horizontal:
-                HorizontalMovement();
-                break;
-            case movementType.Vertical:
-                VerticalMovement();
-                break;
-            case movementType.TLDiagonal:
-                TLDiagonalMovment();
-                break;
-            case movementType.TRDiagonal:
-                TRDiagonalMovement();
-                break;
-            case movementType.BLDiagonal:
-                BLDiagonalMovement();
-                break;
-            case movementType.BRDiagonal:
-                BRDiagonalMovement();
-                break;
-            case movementType.RoatateLeft:
-                RotateLeftMovement();
-                break;
-            case movementType.RotateRight:
-                RotateRightMovement();
-                break;
+        if(enabled){
+            switch (moveType)
+            {
+                case movementType.Horizontal:
+                    HorizontalMovement();
+                    break;
+                case movementType.Vertical:
+                    VerticalMovement();
+                    break;
+                case movementType.TLDiagonal:
+                    TLDiagonalMovment();
+                    break;
+                case movementType.TRDiagonal:
+                    TRDiagonalMovement();
+                    break;
+                case movementType.BLDiagonal:
+                    BLDiagonalMovement();
+                    break;
+                case movementType.BRDiagonal:
+                    BRDiagonalMovement();
+                    break;
+                case movementType.RoatateLeft:
+                    RotateLeftMovement();
+                    break;
+                case movementType.RotateRight:
+                    RotateRightMovement();
+                    break;
+            }
+
         }
+        else{
+            transform.position = Vector3.MoveTowards(transform.position, (transform.position + maximum)*direction* lag, Time.fixedDeltaTime);
+        }
+        
     }
 
     private void HorizontalMovement()
@@ -169,10 +200,10 @@ public class PlatformMovement : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
-    public void startMoving(float c){
+    /*public void startMoving(float c){
         moving = true;
         timeOffset = c;
-    }
+    }*/
 
 
 
