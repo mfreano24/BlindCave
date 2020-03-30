@@ -63,38 +63,44 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 		p1ResetPos = new List<Vector2>(){
 			new Vector2(-11.2f, 11), //1
 			new Vector2(12.71f, 7.74f), //2
-			new Vector2(44.69f, 5.6f)
+			new Vector2(44.69f, 5.6f),
+			new Vector2(82.1f, 8f)
 		};
 		
 		p2ResetPos = new List<Vector2>() {
 			new Vector2(-12.26f, -29.59f), //1
 			new Vector2(12.71f, -29.35f), //2
-			new Vector2(45.1f, -33f)
+			new Vector2(45.1f, -33f),
+			new Vector2(82.1f, -34.09f)
 		};
 
 		p1camPos = new List<Vector2>(){
 			new Vector2(-5.65f, 12),
 			new Vector2(19.5f, 12),
-			new Vector2(51.5f, 12.3f)
+			new Vector2(51.5f, 12.3f),
+			new Vector2(87.9f, 13.9f)
 		};
 
 		p2camPos = new List<Vector2>(){
 			new Vector2(-5.65f, -28.4f),
 			new Vector2(19.5f, -29.3f),
-			new Vector2(51.5f, -28.7f)
+			new Vector2(51.5f, -28.7f),
+			new Vector2(88.25f, -27f)
 		};
 
 		p1buttonPos = new List<Vector2>(){
 			new Vector2(7.80346f, 7.35f),
 			new Vector2(25.5f, 9.91f),
-			new Vector2(58.26f, 4.92f)
+			new Vector2(58.26f, 4.92f),
+			new Vector2(80.9f, 18.24f)
 
 		};
 
 		p2buttonPos = new List<Vector2>(){
 			new Vector2(7.80346f, -32.55f),
 			new Vector2(25.87f, -30.03f),
-			new Vector2(56.01f, -27.06f)
+			new Vector2(56.01f, -27.06f),
+			new Vector2(93.9f, -29.9f)
 
 		};
 
