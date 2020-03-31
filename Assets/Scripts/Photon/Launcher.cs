@@ -125,4 +125,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     #endregion
 
 
+    public void quitButton(){
+        Application.Quit();
+    }
+
+
 }

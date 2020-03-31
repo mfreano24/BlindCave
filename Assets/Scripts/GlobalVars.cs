@@ -111,9 +111,8 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 	private void Update() {
 
 		//buttoncheck
-		//PRESS K FOR DEBUG MODE ADVANCE
-		if(Input.GetKeyDown(KeyCode.K) || ((player1 !=null && player2 !=null) && 
-		  (player1.GetComponent<PlayerMovement>().onButton && player2.GetComponent<PlayerMovement>().onButton)) && !cooldown){
+		//PRESS K FOR DEBUG MODE ADVANCE?
+		if(!cooldown && (player1.GetComponent<PlayerMovement>().onButton && player2.GetComponent<PlayerMovement>().onButton)){
 			cooldown = true;
 			StartCoroutine(resetCooldown());
 			Debug.Log("Advancing Level...");

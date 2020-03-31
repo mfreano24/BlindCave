@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     public float playerSpeed;
     public float jumpHeight;
 	bool isPlaying = true;
+    float xInput;
     public float hSpeed = 5f;
     public float jumpPower = 15f;
     private int directionFacing = 1;
@@ -184,7 +185,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 			return;
 		}
 
-		float xInput = (flipped) * Input.GetAxis("Horizontal");
+		
         rb.velocity = new Vector3((xInput * hSpeed), rb.velocity.y, 0);
 
         //if grounded
@@ -214,6 +215,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
 
 
     private void Update() {
+        xInput = Input.GetAxis("Horizontal");
         if(Input.GetKeyDown(KeyCode.L)){
             //debug purposes
             Debug.Log("On button: " + onButton);
@@ -224,6 +226,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         }
         else if(Input.GetButtonDown("Pause") && !pauseScreen.active){
             pauseScreen.SetActive(true);
+        }
+
+
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Escape)){
+            Quit();
         }
     }
 
