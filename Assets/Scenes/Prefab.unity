@@ -162,7 +162,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -217,7 +217,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 02f74505cfbb03b4dbfb9726ec37771d, type: 3}
-  m_Color: {r: 0.454902, g: 0.454902, b: 0.454902, a: 0}
+  m_Color: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1588,6 +1588,33 @@ Transform:
   m_Father: {fileID: 1941812194}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1246839983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5675088977643745356, guid: b7d57fcdc9b0d7748a7e4db9a67fe3af,
+    type: 3}
+  m_PrefabInstance: {fileID: 5675088975707480339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1246839989
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246839983}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 0.25
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &1518181104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,7 +1692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518181104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.65, y: 0.95, z: -10}
+  m_LocalPosition: {x: -5.49, y: 0.95, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1813,8 +1840,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9043351f8c7db4fa1fb459aa2089e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: {x: -10, y: -2, z: 0}
-  min: {x: 10, y: -2, z: 0}
+  max: {x: -10, y: -1, z: 0}
+  min: {x: 10, y: -1, z: 0}
   divbase: 128
   bound: 1
 --- !u!4 &1941812194 stripped
@@ -1868,12 +1895,12 @@ PrefabInstance:
     - target: {fileID: 5675088977643745399, guid: b7d57fcdc9b0d7748a7e4db9a67fe3af,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.58
+      value: -3.12
       objectReference: {fileID: 0}
     - target: {fileID: 5675088977643745399, guid: b7d57fcdc9b0d7748a7e4db9a67fe3af,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.224
+      value: -2.47
       objectReference: {fileID: 0}
     - target: {fileID: 5675088977643745399, guid: b7d57fcdc9b0d7748a7e4db9a67fe3af,
         type: 3}

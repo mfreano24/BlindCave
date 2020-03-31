@@ -7,6 +7,9 @@ public class Totems : MonoBehaviour
     [SerializeField]
     GameObject player;
     bool carry;
+    Rigidbody2D rb;
+
+    //public Transform player1Transform;
     
 
     // Start is called before the first frame update
@@ -15,6 +18,14 @@ public class Totems : MonoBehaviour
     void Start()
     {
         carry = false;
+        rb = GetComponent<Rigidbody2D>();
+        //Transform player1 = 
+        //Physics2D.IgnoreCollision()
+
+        if (player != null)
+        {
+            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
         
     }
 
@@ -49,17 +60,20 @@ public class Totems : MonoBehaviour
         }
 
         //picking up the totem
-        if(Input.GetButtonDown("Pickup") && !carry){//other.CompareTag("Player")
+        if(Input.GetButtonDown("Pickup") && other.CompareTag("Player") && !carry){//other.CompareTag("Player")
             Debug.Log("Picked up!");
+
+            //Destroy(rb);
+            rb.isKinematic = true;
+
             this.transform.position = new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y + 0.25f, 
             other.gameObject.transform.position.z);
             this.transform.parent = other.gameObject.transform;
             carry = true;
         }
-        else if(Input.GetButtonDown("Pickup") && carry){
+        else if(Input.GetButtonDown("Pickup") && other.CompareTag("Player") && carry){
             Debug.Log("Put down!");
             Debug.Log("Before drop position (" + transform.position+")");
-
 
             if(GetComponentInParent<DebugMovement>() != null)
             {
@@ -83,6 +97,11 @@ public class Totems : MonoBehaviour
             Debug.Log("After drop position (" + transform.position + ")");
             this.transform.parent = null;
             carry = false;
+
+            //add rigidbody here
+            rb.isKinematic = false;
+            //rb = this.AddComponent<Rigidbody2D>();
+
         }
         
     }
