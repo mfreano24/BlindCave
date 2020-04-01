@@ -120,7 +120,7 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 			Debug.Log("Player 1: " + player1);
 			Debug.Log("Player 2: " + player2);
 			Debug.Log("Now starting level " + level);
-			advanceLevel();
+			StartCoroutine(advanceLevel());
 			photonView.RPC("advanceLevel", RpcTarget.All);
 		}
 
@@ -140,7 +140,7 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 	}
 
 	IEnumerator resetCooldown(){
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(5.0f);
 		cooldown = false;
 	}
 
@@ -165,7 +165,8 @@ public class GlobalVars : MonoBehaviourPunCallbacks, IPunObservable {
 	}
 
 	[PunRPC]
-	public void advanceLevel(){
+	public IEnumerator advanceLevel(){
+		yield return new WaitForSeconds(1f);
         GameObject.Find("P1").transform.position = new Vector3 (p1ResetPos[level].x, p1ResetPos[level].y , 0f);
         GameObject.Find("P1_Camera").transform.position = new Vector3 (p1camPos[level].x, p1camPos[level].y , -10f);
 		GameObject.Find("P1L1").transform.position = new Vector3 (p1buttonPos[level].x, p1buttonPos[level].y , 0f);

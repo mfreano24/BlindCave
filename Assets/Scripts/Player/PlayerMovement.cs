@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     public static GameObject LocalPlayerInstance;
     public GameObject playerlightPrefab;
     public GameObject cavelightPrefab;
-    public GameObject pauseScreen;
     GameObject light_inst;
     GameObject backlight_inst;
     GameObject p1_backing;
@@ -168,10 +167,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
         onButton = false;
         cam = GameObject.Find(this.gameObject.name+"_Camera");
         DontDestroyOnLoad(cam);
-
-
-        pauseScreen = GameObject.FindGameObjectWithTag("Pause");
-        pauseScreen.SetActive(false);
     }
 
     void FixedUpdate() {
@@ -221,12 +216,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log("On button: " + onButton);
         }
 
-        if(Input.GetButtonDown("Pause") && pauseScreen.active){
-            pauseScreen.SetActive(false);
-        }
-        else if(Input.GetButtonDown("Pause") && !pauseScreen.active){
-            pauseScreen.SetActive(true);
-        }
+        
 
 
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Escape)){

@@ -149,8 +149,6 @@ MonoBehaviour:
     type: 3}
   cavelightPrefab: {fileID: 8870786540469086261, guid: 2f59b4fe1ead73b46981e83e8e6a2129,
     type: 3}
-  pauseScreen: {fileID: 5585950680778361889, guid: ee9a26ff3d4b9b64982787d691523b13,
-    type: 3}
   playerSpeed: 5
   jumpHeight: 6
   hSpeed: 5
