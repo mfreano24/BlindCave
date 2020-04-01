@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class MainUI : MonoBehaviour
 {
@@ -26,7 +27,13 @@ public class MainUI : MonoBehaviour
         gv = GameObject.Find("EventSystem").GetComponent<GlobalVars>();
         clearInfoText();
         currLv = 0;
-        levelText();
+        if(PhotonNetwork.PlayerList.Length < 2){
+            StartCoroutine(drawText("Waiting for player 2...."));
+        }
+        else{
+            levelText();
+        }
+        
     }
     void Update(){
 
