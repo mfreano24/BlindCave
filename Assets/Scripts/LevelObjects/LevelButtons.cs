@@ -19,10 +19,11 @@ public class LevelButtons : MonoBehaviour
 
     SpriteRenderer renderer;
 
-    public enum buttonType
+    public enum bType
     {
         rotatePlatformLeft, rotatePlatformRight, colorChange
     };
+    public bType buttonType;
 
 
 
@@ -145,9 +146,17 @@ public class LevelButtons : MonoBehaviour
             Totems t = other.GetComponent<Totems>();
             if (t.carry == false)
             {
-                buttonPressed = true;
-                triggeredEffect = false;
-                changeColor();
+                //need to check the enum in here
+                switch (buttonType)
+                {
+                    case bType.colorChange:
+                        buttonPressed = true;
+                        triggeredEffect = false;
+                        changeColor();
+                        break;
+
+                }
+                
             }
         }
         else
@@ -163,9 +172,17 @@ public class LevelButtons : MonoBehaviour
             Totems t = other.GetComponent<Totems>();
             if (t.carry == true)
             {
-                buttonPressed = false;
-                triggeredEffect = true;
-                changeColor();
+                //need to check the enum in here
+                switch (buttonType)
+                {
+                    case bType.colorChange:
+                        buttonPressed = false;
+                        triggeredEffect = true;
+                        changeColor();
+                        break;
+
+                }
+
             }
         }
         else

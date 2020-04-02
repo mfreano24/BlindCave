@@ -240,7 +240,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d713a7ad70f0bae4f94947d5a40ce856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonPressed: 0
+  triggeredEffect: 0
   colorChangingBlock: {fileID: 1195169401}
+  buttonType: 2
 --- !u!1001 &952163786
 PrefabInstance:
   m_ObjectHideFlags: 0
