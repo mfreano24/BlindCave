@@ -243,7 +243,8 @@ MonoBehaviour:
   buttonPressed: 0
   triggeredEffect: 0
   colorChangingBlock: {fileID: 1195169401}
-  buttonType: 2
+  FloatingPlatform: {fileID: 1635102574}
+  buttonType: 0
 --- !u!1001 &952163786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1861,6 +1862,7 @@ MonoBehaviour:
   min: {x: 10, y: -1, z: 0}
   divbase: 128
   bound: 1
+  buttonPressed: 0
 --- !u!4 &1941812194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7749250407699880685, guid: ecb8569ad26a3fe489baf3386163c243,

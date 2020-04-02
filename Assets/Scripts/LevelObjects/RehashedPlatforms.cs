@@ -30,6 +30,10 @@ public class RehashedPlatforms : MonoBehaviourPunCallbacks, IPunObservable
     float bound;
     Vector3 middle;
     int direction;
+
+
+    public bool buttonPressed = false;
+
     void Start()
     {
         middle = (max + min)/2;
@@ -41,7 +45,8 @@ public class RehashedPlatforms : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
-        if(PhotonNetwork.PlayerList.Length > 1 || Input.GetKey(KeyCode.P) /*remove this extra cond later pls*/){
+        if(PhotonNetwork.PlayerList.Length > 1 || buttonPressed == true){
+            //Input.GetKey(KeyCode.P) /*remove this extra cond later pls*/
             if(direction > 0){
                 Vector3 dist = max - transform.position;
                 dist.z = 0; //dont want to be moving on that axis.

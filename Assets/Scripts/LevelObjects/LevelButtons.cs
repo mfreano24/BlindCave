@@ -17,11 +17,16 @@ public class LevelButtons : MonoBehaviour
     [SerializeField]
     GameObject colorChangingBlock;
 
+    [SerializeField]
+    GameObject FloatingPlatform;
+
     SpriteRenderer renderer;
 
     public enum bType
     {
-        rotatePlatformLeft, rotatePlatformRight, colorChange
+        //horizontalPlatformMovement, verticalPlatformMovement, 
+        //platform movement type actually controlled by the RehashedPlatform Script
+        platformMovement ,colorChange
     };
     public bType buttonType;
 
@@ -40,6 +45,15 @@ public class LevelButtons : MonoBehaviour
             {
                 oldColor = renderer.color;
             }
+        }
+
+        if(FloatingPlatform != null)
+        {
+            
+        }
+        else
+        {
+            
         }
     }
 
@@ -127,6 +141,8 @@ public class LevelButtons : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         //Debug.Log("Level Button On Trigger Stay");
+
+        //may need to use onTriggerStay2D in implementation
         if (other.CompareTag("Totem"))
         {
             Debug.Log("Colliding with a totem");
@@ -155,13 +171,24 @@ public class LevelButtons : MonoBehaviour
                         changeColor();
                         break;
 
+                    case bType.platformMovement:
+                        if(FloatingPlatform)
+                        {
+                            FloatingPlatform.GetComponent<RehashedPlatforms>().buttonPressed = true;
+                            //maybe replace with something that assigns the value once instead of everytime?
+                        }
+                        else
+                        {
+                            //don't do anything here
+                        }
+                        break;
                 }
                 
             }
         }
         else
         {
-
+            //don't want to interact with it
         }
     }
 
@@ -181,6 +208,16 @@ public class LevelButtons : MonoBehaviour
                         changeColor();
                         break;
 
+                    case bType.platformMovement:
+                        if (FloatingPlatform)
+                        {
+                            FloatingPlatform.GetComponent<RehashedPlatforms>().buttonPressed = false;
+                        }
+                        else
+                        {
+                            //don't do anything here
+                        }
+                        break;
                 }
 
             }
