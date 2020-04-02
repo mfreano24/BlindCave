@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 797401626}
   - component: {fileID: 797401628}
   - component: {fileID: 797401627}
+  - component: {fileID: 797401629}
   m_Layer: 0
   m_Name: ButtonTrigger
   m_TagString: Untagged
@@ -146,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797401625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 2.56, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1941812194}
@@ -162,7 +163,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -217,7 +218,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 02f74505cfbb03b4dbfb9726ec37771d, type: 3}
-  m_Color: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 1}
+  m_Color: {r: 0.92496306, g: 0.9811321, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -227,6 +228,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &797401629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797401625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d713a7ad70f0bae4f94947d5a40ce856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorChangingBlock: {fileID: 1195169401}
 --- !u!1001 &952163786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1692,7 +1706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518181104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.49, y: 0.95, z: -10}
+  m_LocalPosition: {x: -2.3, y: 0.95, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1974,7 +1988,7 @@ PrefabInstance:
     - target: {fileID: 7749250407699880685, guid: ecb8569ad26a3fe489baf3386163c243,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.11
+      value: -3.16
       objectReference: {fileID: 0}
     - target: {fileID: 7749250407699880685, guid: ecb8569ad26a3fe489baf3386163c243,
         type: 3}
@@ -2019,6 +2033,16 @@ PrefabInstance:
     - target: {fileID: 7749250407699880685, guid: ecb8569ad26a3fe489baf3386163c243,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749250407699880687, guid: ecb8569ad26a3fe489baf3386163c243,
+        type: 3}
+      propertyPath: colorChangingBlock
+      value: 
+      objectReference: {fileID: 1195169401}
+    - target: {fileID: 7749250407699880687, guid: ecb8569ad26a3fe489baf3386163c243,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

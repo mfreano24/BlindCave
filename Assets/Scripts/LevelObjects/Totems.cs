@@ -32,7 +32,7 @@ public class Totems : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Carry = " + carry);
+        //Debug.Log("Carry = " + carry);
 
         if (Input.GetButtonDown("Pickup"))
         {
@@ -52,11 +52,11 @@ public class Totems : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Other tag is player");
+            //Debug.Log("Other tag is player");
         }
         else
         {
-            Debug.Log("Other tag is NOT player");
+            //Debug.Log("Other tag is NOT player");
         }
 
         //picking up the totem
@@ -73,14 +73,14 @@ public class Totems : MonoBehaviour
         }
         else if(Input.GetButtonDown("Pickup") && other.CompareTag("Player") && carry){
             Debug.Log("Put down!");
-            Debug.Log("Before drop position (" + transform.position+")");
+            //Debug.Log("Before drop position (" + transform.position+")");
 
             if(GetComponentInParent<DebugMovement>() != null)
             {
-                Debug.Log("Parent component exists");
+                //Debug.Log("Parent component exists");
                 int directionFacing = GetComponentInParent<DebugMovement>().directionFacing;
-                Debug.Log("directionFacing: " + directionFacing);
-                Debug.Log("Parents transform position: " + transform.parent.position.x + ", " + transform.parent.position.y + ", " + transform.parent.position.z);
+                //Debug.Log("directionFacing: " + directionFacing);
+                //Debug.Log("Parents transform position: " + transform.parent.position.x + ", " + transform.parent.position.y + ", " + transform.parent.position.z);
                 this.transform.position = new Vector3(transform.parent.position.x + directionFacing,
                     transform.parent.position.y,
                     transform.parent.position.z);
@@ -94,7 +94,7 @@ public class Totems : MonoBehaviour
             //this.transform.position = new Vector3(other.gameObject.transform.position.x + other.gameObject.GetComponent<DebugMovement>().directionFacing, 
             //    other.gameObject.transform.position.y , 
             //    other.gameObject.transform.position.z);
-            Debug.Log("After drop position (" + transform.position + ")");
+            //Debug.Log("After drop position (" + transform.position + ")");
             this.transform.parent = null;
             carry = false;
 

@@ -7,11 +7,17 @@ public class LevelButtons : MonoBehaviour
 
 
     private bool platformRotating;
-    private bool buttonPressed = false;
-    private bool triggeredEffect;
+
+    //should be private, public for testing
+    public bool buttonPressed;
+    public bool triggeredEffect;
 
     private Color oldColor;
 
+    [SerializeField]
+    GameObject colorChangingBlock;
+
+    SpriteRenderer renderer;
 
     public enum buttonType
     {
@@ -24,7 +30,16 @@ public class LevelButtons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InvokeRepeating("changeColor", 1.0f, 2.0f);
+        //InvokeRepeating("changeColorTimer", 1.0f, 2.0f);
+        buttonPressed = false;
+        if (colorChangingBlock != null)
+        {
+            renderer = colorChangingBlock.GetComponent<SpriteRenderer>();
+            if (renderer != null)
+            {
+                oldColor = renderer.color;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -37,14 +52,50 @@ public class LevelButtons : MonoBehaviour
 
     private void changeColor()
     {
-        GameObject childObject = transform.GetChild(0).gameObject;
-        if(childObject == null)
+        if (colorChangingBlock == null)
         {
-            Debug.Log("The child is NULL");
+            Debug.Log("The colorChangingBlock is NULL");
         }
         else
         {
-            SpriteRenderer renderer = childObject.GetComponent<SpriteRenderer>();
+            if (renderer != null)
+            {
+                //triggeredEffect = false;
+                if ((triggeredEffect == false))
+                {
+                    //oldColor = renderer.color;
+
+                    renderer.color = Color.red;
+
+                    //buttonPressed = true;
+                    triggeredEffect = true;
+
+                }
+                else if (triggeredEffect == true)
+                {
+                    renderer.color = oldColor;
+
+                    //buttonPressed = false;
+                    triggeredEffect = false;
+                }
+            }
+            else
+            {
+                Debug.Log("The sprite renderer of the child is null");
+            }
+        }
+    }
+
+    private void changeColorTimer()
+    {
+        //GameObject childObject = transform.GetChild(0).gameObject;
+        if(colorChangingBlock == null)
+        {
+            Debug.Log("The colorChangingBlock is NULL");
+        }
+        else
+        {
+            SpriteRenderer renderer = colorChangingBlock.GetComponent<SpriteRenderer>();
             if(renderer!= null)
             {
                 triggeredEffect = false;
@@ -74,13 +125,44 @@ public class LevelButtons : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        //Debug.Log("Level Button On Trigger Stay");
         if (other.CompareTag("Totem"))
         {
             Debug.Log("Colliding with a totem");
+            
         }
         else
         {
             Debug.Log("NOT Totem");
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Totem"))
+        {
+            buttonPressed = true;
+            triggeredEffect = false;
+            changeColor();
+        }
+        else
+        {
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Totem"))
+        {
+            buttonPressed = false;
+            triggeredEffect = true;
+            changeColor();
+        }
+        else
+        {
+
         }
     }
 
