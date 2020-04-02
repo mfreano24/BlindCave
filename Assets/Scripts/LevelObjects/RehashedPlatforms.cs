@@ -45,7 +45,7 @@ public class RehashedPlatforms : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
-        if(PhotonNetwork.PlayerList.Length > 1 || buttonPressed == true){
+        if(PhotonNetwork.PlayerList.Length > 1 || buttonPressed == true || Input.GetKey(KeyCode.P)){
             //Input.GetKey(KeyCode.P) /*remove this extra cond later pls*/
             if(direction > 0){
                 Vector3 dist = max - transform.position;
