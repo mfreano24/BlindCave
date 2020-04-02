@@ -6,8 +6,9 @@ public class Totems : MonoBehaviour
 {
     [SerializeField]
     GameObject player;
-    bool carry;
+    public bool carry;
     Rigidbody2D rb;
+
 
     //public Transform player1Transform;
     
@@ -62,7 +63,6 @@ public class Totems : MonoBehaviour
         //picking up the totem
         if(Input.GetButtonDown("Pickup") && other.CompareTag("Player") && !carry){//other.CompareTag("Player")
             Debug.Log("Picked up!");
-
             //Destroy(rb);
             rb.isKinematic = true;
 

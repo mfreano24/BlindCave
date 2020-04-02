@@ -142,9 +142,13 @@ public class LevelButtons : MonoBehaviour
     {
         if (other.CompareTag("Totem"))
         {
-            buttonPressed = true;
-            triggeredEffect = false;
-            changeColor();
+            Totems t = other.GetComponent<Totems>();
+            if (t.carry == false)
+            {
+                buttonPressed = true;
+                triggeredEffect = false;
+                changeColor();
+            }
         }
         else
         {
@@ -156,9 +160,13 @@ public class LevelButtons : MonoBehaviour
     {
         if (other.CompareTag("Totem"))
         {
-            buttonPressed = false;
-            triggeredEffect = true;
-            changeColor();
+            Totems t = other.GetComponent<Totems>();
+            if (t.carry == true)
+            {
+                buttonPressed = false;
+                triggeredEffect = true;
+                changeColor();
+            }
         }
         else
         {
