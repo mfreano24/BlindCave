@@ -85,6 +85,10 @@ public class MainUI : MonoBehaviour
             case 3:
                 StartCoroutine(drawText("4.\nMore of those floaty ones."));
                 break;
+
+            case 4:
+                StartCoroutine(drawText("5.\nPatience can be a virtue, I think..."));
+                break;
             default:
                 Debug.Log("Not implemented");
                 break;
